@@ -7,13 +7,15 @@ class Project_ctrl extends CI_Controller {
         parent::__construct();
         $this->load->model('Project_model');
     }
-    
+    public function popupProject(){
+        $this->load->view('popupProject');
+    }
     public function project()
 	{
 		$this->load->view('head');
 		$this->load->view('body');
         $this->load->view('footer');
-        $data['members'] = $this->Project_model->getTeam();        
+        
         $this->load->library("pagination");
         $config['base_url'] = base_url('Project_ctrl/project');  
         $config['uri_segement'] = 3;
@@ -42,7 +44,9 @@ class Project_ctrl extends CI_Controller {
         $this->pagination->initialize($config);
         $data['pagination'] = $this->pagination->create_links();
         // $this->load->view('Test_view',['getTeam' => $getTeam]);
+        $data['team'] = $this->Project_model->getTeam();        
         $this->load->view('project_view', $data); //$getTeam
+        
     }
     public function insert_project()
     {
@@ -55,28 +59,32 @@ class Project_ctrl extends CI_Controller {
             $this->db->where('projectCode', $projectCode, 'projectName', $projectName);
             $query = $this->db->get('projects');
             $num = $query->num_rows();
+            
             if ($num > 0){
-                echo "<script>";
-                echo "alert('Data Duplicate!');";
-                echo " window.location.replace('http://localhost/TIMESHEET/Welcome/inserted');";
-                echo "</script>";
+                 $this->session->set_flashdata('un_success', TRUE);
+                 redirect('Project_ctrl/project','refresh');
+                // echo "alert('Data Duplicate!');";
+                // echo " window.location.replace('http://localhost/TIMESHEET/Project_ctrl/project');";
+                // echo "</script>";
             } else {
                 $data = array(
                     "projectCode" => $this->input->post("projectCode"),
                     "projectName" => $this->input->post("projectName"),
                     "budget" => $this->input->post("budget"),
+                    "team" => $this->input->post("team"),
                     "startDate" => $this->input->post("startD"),
                     "endDate" => $this->input->post("endD")
                 );
+            $this->Project_model->insert($data);
+            $this->session->set_flashdata('save_success', TRUE);
+            redirect('Project_ctrl/project','refresh');
             
-            $this->project_model->insert($data);
-            redirect(base_url() . "inserted");
-            }
-    } 
-    public function inserted()
-    {
-        $this->project();
-        
-        
+            } 
+    }
+
+    public function delete_data($id){
+        $this->Project_model->delete($id);
+        $this->session->set_flashdata('del_success', TRUE);
+        redirect('Project_ctrl/project','refresh');
     }
 }

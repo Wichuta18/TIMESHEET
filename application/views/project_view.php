@@ -108,13 +108,13 @@
                       </div>
                     </div>
                     <div class="col-sm-6">
-                      <label for="budget">Team:</label>
+                      <label for="team">Team:</label>
                       <fieldset class="form-group">
                         <select class="custom-select" name="team" id="team">
                           <option value="">Choose...</option>
                           <?php
-                          foreach ($getTeam as $row) {
-                            echo '<option value="' . $row->idMember . '">' . $row->NameTeam
+                          foreach ($team as $row) {
+                            echo '<option value="' . $row->NameTeam . '">' . $row->NameTeam
                               . '</option>';
                           }
                           ?>
@@ -203,7 +203,8 @@
                     <th>#</th>
                     <th scope="col">ProjectCode</th>
                     <th scope="col">ProjectName</th>
-                    <th scope="col">Budget</th>
+                    <th scope="col">Budget/THB</th>
+                    <th scope="col">Team</th>
                     <th scope="col">Start Date</th>
                     <th scope="col">Finish Date</th>
                     <th scope="col">Action</th>
@@ -217,18 +218,20 @@
                       <td><?php echo $row->idProject; ?></td>
                       <td><?php echo $row->projectCode; ?></td>
                       <td><?php echo $row->projectName; ?></td>
-                      <td><?php echo $row->budget; ?></td>
+                      <td><?php echo $row->budget; ?>.00</td>
+                      <td><?php echo $row->team; ?></td>
                       <td><?php echo $row->startDate; ?></td>
                       <td><?php echo $row->endDate; ?></td>
                       <td><a href="#editProject" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a></td>
+                        <a href="<?php echo base_url('Project_ctrl/delete_data/'.$row->idProject);?>" onclick="return confirm('confirm delete?');"  
+                        data-toggle="tooltip"   class="remove" data-toggle="modal"><i class="material-icons"  title="Delete">&#xE872;</i></a></td>
                     </tr>
                   <?php
                     }
                   } else {
                     ?>
                   <tr>
-                    <td colspan="3">No Data</td>
+                    <td colspan="5">No Data</td>
                   </tr>
                 <?php
                 }
@@ -256,17 +259,39 @@
     </div>
   </div>
   <!-- ////////////////////////////////////////////////////////////////////////////-->
-  <!-- <script type="text/javascript">
-     $(function () {
-        $('#startD').datetimepicker();
-        $('#endD').datetimepicker({
-            useCurrent: false //Important! See issue #1075
-        });
-        $("#startD").on("dp.change", function (e) {
-            $('#endD').data("DateTimePicker").minDate(e.date);
-        });
-        $("#endD").on("dp.change", function (e) {
-            $('#startD').data("DateTimePicker").maxDate(e.date);
-        });
+  <script type="text/javascript">
+    $(".remove").click(function(){
+        var id = $(this).attr("idProject");
+       swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this imaginary file!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel plx!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          $.ajax({
+             url: 'project_ctrl/delete_data'+idProject,
+             type: 'DELETE',
+             error: function() {
+                alert('Something is wrong');
+             },
+             success: function(data) {
+                  $("#"+idProject).remove();
+                  swal("Deleted!", "Your imaginary file has been deleted.", "success");
+             }
+          });
+        } else {
+          swal("Cancelled", "Your imaginary file is safe :)", "error");
+        }
+      });
+     
     });
-  </script> -->
+    
+</script>
+  </script>

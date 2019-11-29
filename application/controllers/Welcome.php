@@ -15,4 +15,6 @@ class Welcome extends CI_Controller {
 		$this->load->view('dashbord');
 		$this->load->view('footer');
 	}
+	
+
 }

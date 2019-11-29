@@ -26,9 +26,12 @@ class Project_model extends CI_Model {
 		return count($result);
 	}
 	function getTeam(){
+		$this->db->order_by('NameTeam','ASC');
 		$query = $this->db->get('members');
-		if($query->num_rows() > 0){
-			return $query->result();
+		return $query->result();
+		}
+
+		function delete($id){
+			$this->db->delete('projects', array('idProject'=>$id));
 		}
 	}
-} 
