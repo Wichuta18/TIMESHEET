@@ -97,7 +97,7 @@
                   <br>
                   <label for="projectName">ProjectName:</label>
                   <input type="text" class="form-control" id="projectName" placeholder="Enter Project Name" name="projectName" required>
-                  
+
                   <br>
                   <div class="row">
                     <div class="col-sm-6">
@@ -136,7 +136,7 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label class="control-label" for="datepicker-end">End Date</label>
-                        <input data-format="dd/MM/yyyy" type="date" class="form-control"  name="endD" id="endD">
+                        <input data-format="dd/MM/yyyy" type="date" class="form-control" name="endD" id="endD">
                         <span class="add-on">
                           <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                           </i>
@@ -157,26 +157,79 @@
       </div>
     </div>
     <!-- Delete Modal HTML -->
-    <div id="deleteEmployeeModal" class="modal fade">
+    <div id="userModals" class="modal fade">
       <div class="modal-dialog">
-        <div class="modal-content">
-          <form>
+        <form id="user_form" method="Post" action="">
+          <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Delete Employee</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Project</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-              <p>Are you sure you want to delete these Records?</p>
-              <p class="text-warning"><small>This action cannot be undone.</small></p>
+              <form class="form-horizontal" id="frm_create">
+                <label for="projectCode">ProjectCode:</label>
+                <input type="text" class="form-control" id="projectCode"  required>
+                <br>
+                <label for="projectName">ProjectName:</label>
+                <input type="text" class="form-control" id="projectName" required>
+
+                <br>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <label for="budget">Budget:</label>
+                    <div class="input-group-append">
+                      <input type="text" class="form-control" id="budget"  required>
+                      <span class="input-group-text">.00 THB</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="team">Team:</label>
+                    <fieldset class="form-group">
+                      <select class="custom-select"  id="team">
+                        <option value="">Choose...</option>
+                        <?php
+                        foreach ($team as $row) {
+                          echo '<option value="' . $row->NameTeam . '">' . $row->NameTeam
+                            . '</option>';
+                        }
+                        ?>
+                      </select>
+                    </fieldset>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="control-label" for="datepicker-start">Start Date</label>
+                      <input data-format="dd/MM/yyyy" type="date" class="form-control"  id="startD">
+                      <span class="add-on">
+                        <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                        </i>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="control-label" for="datepicker-end">End Date</label>
+                      <input data-format="dd/MM/yyyy" type="date" class="form-control" id="endD">
+                      <span class="add-on">
+                        <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                        </i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </form>
             </div>
             <div class="modal-footer">
+              <input type="submit" name="action" class="btn btn-info btn-lg" id="btn_create" value="Add" />
               <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-              <input type="submit" class="btn btn-danger" value="Delete">
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
+
     <!-- End Delete Modal HTML -->
 
     <div class="content-body">
@@ -213,7 +266,7 @@
                 <?php
                 if ($select_data->num_rows() > 0) {
                   foreach ($select_data->result() as $row) {
-                    ?>
+                ?>
                     <tr>
                       <td><?php echo $row->idProject; ?></td>
                       <td><?php echo $row->projectCode; ?></td>
@@ -222,14 +275,15 @@
                       <td><?php echo $row->team; ?></td>
                       <td><?php echo $row->startDate; ?></td>
                       <td><?php echo $row->endDate; ?></td>
-                      <td><a href="#editProject" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="<?php echo base_url('Project_ctrl/delete_data/'.$row->idProject);?>" onclick="return confirm('confirm delete?');"  
-                        data-toggle="tooltip"   class="remove" data-toggle="modal"><i class="material-icons"  title="Delete">&#xE872;</i></a></td>
+                      <td>
+                        <a href="#" class="edit" data-toggle="modal" data-target="#userModals"  data-toggle="tooltip"><i class="material-icons"  title="Edit">&#xE254;</i></a>
+                        <a href="<?php echo base_url('Project_ctrl/delete_data/' . $row->idProject); ?>" onclick="return confirm('confirm delete?');" data-toggle="tooltip" class="remove" data-toggle="modal"><i class="material-icons" title="Delete">&#xE872;</i></a>
+                      </td>
                     </tr>
                   <?php
-                    }
-                  } else {
-                    ?>
+                  }
+                } else {
+                  ?>
                   <tr>
                     <td colspan="5">No Data</td>
                   </tr>
@@ -259,39 +313,4 @@
     </div>
   </div>
   <!-- ////////////////////////////////////////////////////////////////////////////-->
-  <script type="text/javascript">
-    $(".remove").click(function(){
-        var id = $(this).attr("idProject");
-       swal({
-        title: "Are you sure?",
-        text: "You will not be able to recover this imaginary file!",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "No, cancel plx!",
-        closeOnConfirm: false,
-        closeOnCancel: false
-      },
-      function(isConfirm) {
-        if (isConfirm) {
-          $.ajax({
-             url: 'project_ctrl/delete_data'+idProject,
-             type: 'DELETE',
-             error: function() {
-                alert('Something is wrong');
-             },
-             success: function(data) {
-                  $("#"+idProject).remove();
-                  swal("Deleted!", "Your imaginary file has been deleted.", "success");
-             }
-          });
-        } else {
-          swal("Cancelled", "Your imaginary file is safe :)", "error");
-        }
-      });
-     
-    });
-    
-</script>
-  </script>
+  

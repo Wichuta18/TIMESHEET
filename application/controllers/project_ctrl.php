@@ -87,4 +87,5 @@ class Project_ctrl extends CI_Controller {
         $this->session->set_flashdata('del_success', TRUE);
         redirect('Project_ctrl/project','refresh');
     }
+
 }

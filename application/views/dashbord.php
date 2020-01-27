@@ -72,7 +72,7 @@
     </div>
     
     <!-- Bar Chart -->
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
@@ -95,7 +95,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
 </section>
@@ -104,7 +104,7 @@
 <!-- line chart section start -->
 <section id="chartjs-line-charts">
     <!-- Line Chart -->
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
@@ -128,16 +128,16 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 </section>
 <!-- // line chart section end -->
 
 <!-- Pie charts section start -->
-<section id="chartjs-pie-charts">
-    <div class="row">
+<!-- <section id="chartjs-pie-charts">
+    <div class="row"> -->
         <!-- Simple Pie Chart -->
-        <div class="col-md-6 col-sm-12">
+        <!-- <div class="col-md-6 col-sm-12">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Simple Pie Chart</h4>
@@ -159,10 +159,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- Simple Doughnut Chart -->
-        <div class="col-md-6 col-sm-12">
+        <!-- <div class="col-md-6 col-sm-12">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Simple Doughnut Chart</h4>
@@ -184,7 +184,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>    
 </section>
 <!-- // Pie charts section end -->
