@@ -27,10 +27,13 @@ class Login_ctrl extends CI_Controller {
             $this->session->set_userdata('username',$row->username);
             $this->session->set_userdata('level',$row->level);
 
-            if($this->session->userdata('level')=="Admin"){
+            if($this->session->userdata('level')=="A"){
                 redirect('Project_ctrl/project','refresh');
-            }elseif($this->session->userdata('level')=="Member"){
-                echo 'Hello';
+            }elseif($this->session->userdata('level')=="M"){
+                echo 'Hello Member';
+            }
+            elseif($this->session->userdata('level')=="L"){
+            echo 'Hello Leader';
             }
         }else{
             $data['pesan']="Username and Password wrong!!";
