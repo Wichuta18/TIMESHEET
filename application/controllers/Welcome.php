@@ -10,10 +10,7 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('head');
-		$this->load->view('body');
-		$this->load->view('dashbord');
-		$this->load->view('footer');
+		$this->load->view('login_view');
 	}
 	
 
