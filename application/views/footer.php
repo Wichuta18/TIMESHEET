@@ -30,34 +30,10 @@
   <?php endif; ?>
 
   <?php if ($this->session->flashdata('del_success')) : ?>
-  swal("","Delete Data Success", "success");
+    swal("", "Delete Data Success", "success");
   <?php endif; ?>
-  
-//   function deletedata() 
-//   {
-//     Swal({
-//       title: 'Are you sure?',
-//       text: "You won't be able to revert this!",
-//       icon: 'warning',
-//       showCancelButton: true,
-//       confirmButtonColor: '#3085d6',
-//       cancelButtonColor: '#d33',
-//       confirmButtonText: 'Yes, delete it!',
-//       closeOnConfirm: false
-//     },
-//     function(idProject){
-//       $.ajax({
-//             url: "<?php echo base_url('project_ctrl/delete_data')?>",
-//             type: "post",
-//             data: {idProject:idProject},
-//             success:function(){
-//               swal('Data Delete Success', 'delect_success');
-//             },
-//             error:function(){
-//               swal('Data Delete Unsuccess', 'delete_error');
-//             }
-//       });
-//     });
-// }
- 
+
+  <?php if ($this->session->flashdata('save_update')) : ?>
+    swal("", "Edit Data Complete!", "success");
+  <?php endif; ?>
 </script>

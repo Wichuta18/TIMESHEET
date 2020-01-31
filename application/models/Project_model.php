@@ -11,10 +11,12 @@ class Project_model extends CI_Model
 		parent::__construct();
 		$this->load->database();
 	}
+
 	function insert($data)
 	{
 		$this->db->insert("projects", $data);
 	}
+
 	function select_data($limit, $start)
 	{
 		$this->db->limit($limit, $start);
@@ -30,6 +32,7 @@ class Project_model extends CI_Model
 		$result = $query->result();
 		return count($result);
 	}
+
 	function getTeam()
 	{
 		$this->db->order_by('NameTeam', 'ASC');
@@ -44,14 +47,19 @@ class Project_model extends CI_Model
 
 	function update($id)
 	{
-		$this->db->where('idProject',$id);
-		$query = $this->db->get('projects');
-		return $query;
+		$data = array(
+			"projectCode" => $this->input->post("projectCode"),
+			"projectName" => $this->input->post("projectName"),
+			"budget" => $this->input->post("budget"),
+			"team" => $this->input->post("team"),
+			"startDate" => $this->input->post("startDate"),
+			"endDate" => $this->input->post("endDate")
+		);
+		$this->db->where(array('idProject'=>$id));
+		$this->db->update("projects", $data);
 	}
 
-	function update_data($data, $id)  
-      {  
-           $this->db->where("idProject", $id);  
-           $this->db->update("projects", $data);  
-	  }
+	function getbyID($id){
+		return $this->db->get_where('projects',array('idProject'=>$id))->row();
+	}
 }
