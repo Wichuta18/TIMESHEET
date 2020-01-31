@@ -60,10 +60,6 @@
   </div>
   <div class="main-menu-content">
     <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-      <li><a href="<?php echo base_url("welcome/index") ?>"><i class="la la-dashboard"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
-      </li>
-      <li class=" nav-item"><a href="icons.html"><i class="la la-calendar-check-o"></i><span class="menu-title" data-i18n="">Time Tracker</span></a>
-      </li>
       <li class="active"><a href="<?php echo base_url("project_ctrl/project") ?>"><i class="la la-credit-card"></i><span class="menu-title" data-i18n="">Projects</span></a>
       </li>
       <li class=" nav-item"><a href="icons.html"><i class="la la-group"></i><span class="menu-title" data-i18n="">Members</span></a>

@@ -8,20 +8,16 @@
         </ul>
     </div>
     <div class="main-menu-content">
-        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li><a href="<?php echo base_url("welcome/index") ?>"><i class="la la-dashboard"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
-            </li>
-            <li class=" nav-item"><a href="icons.html"><i class="la la-calendar-check-o"></i><span class="menu-title" data-i18n="">Time Tracker</span></a>
-            </li>
-            <li class="active"><a href="<?php echo base_url("project_ctrl/project") ?>"><i class="la la-credit-card"></i><span class="menu-title" data-i18n="">Projects</span></a>
-            </li>
-            <li class=" nav-item"><a href="icons.html"><i class="la la-group"></i><span class="menu-title" data-i18n="">Members</span></a>
-            </li>
-        </ul>
-        <div class="colorlib-footer">
-        </div>
-    </div><a class="btn btn-dark btn-block btn-glow btn-upgrade-pro mx-1" href="">Admin</a>
-    <div class="navigation-background"></div>
+    <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+      <li class="active"><a href="<?php echo base_url("project_ctrl/project") ?>"><i class="la la-credit-card"></i><span class="menu-title" data-i18n="">Projects</span></a>
+      </li>
+      <li class=" nav-item"><a href="icons.html"><i class="la la-group"></i><span class="menu-title" data-i18n="">Members</span></a>
+      </li>
+    </ul>
+    <div class="colorlib-footer">
+    </div>
+  </div><a class="btn btn-dark btn-block btn-glow btn-upgrade-pro mx-1" href="">Admin</a>
+  <div class="navigation-background"></div>
 </div>
 
 <!-- ############################################################################################################### -->
@@ -87,7 +83,7 @@
                                             </div>
                                         </div>
                                         <br>
-                                        <div class="offset-sm-4 col-sm-10">
+                                        <div class="offset-sm-8 col-sm-10">
                                             <button type="submit" name="action" class="btn btn-info center-block" id="btn_create">Add</button> &nbsp;
                                             <a href="<?php echo base_url('Project_ctrl/project')?>"><button type="button" class="btn btn-default center-block">Cancel</button></a>
                                         </div>
