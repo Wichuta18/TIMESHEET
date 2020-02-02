@@ -19,7 +19,11 @@ class Project_model extends CI_Model
 
 	function select_data($limit, $start)
 	{
+		$search = $this->input->get('search');
+		$this->db->like(array('projectCode'=>$search));
+		$this->db->or_like(array('projectName'=>$search));
 		$this->db->limit($limit, $start);
+		$this->db->order_by('idProject  DESC');
 		$query = $this->db->get("projects");
 		$this->lastQuery = $this->db->last_query();
 		return $query;
@@ -27,6 +31,9 @@ class Project_model extends CI_Model
 
 	function getTotalrows()
 	{
+		$search = $this->input->get('search');
+		$this->db->like(array('projectCode'=>$search));
+		$this->db->or_like(array('projectName'=>$search));
 		$sql = explode('LIMIT', $this->lastQuery);
 		$query = $this->db->query($sql[0]);
 		$result = $query->result();

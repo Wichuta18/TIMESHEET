@@ -45,7 +45,7 @@ class Project_ctrl extends CI_Controller
     public function create_project()
     {
         $this->load->view('head');
-        $this->load->view('body');
+        $this->load->view('project/body_project');
         $data['team'] = $this->Project_model->getTeam();
         $this->load->view('Project/create_project', $data);
         $this->load->view('footer');
@@ -81,7 +81,7 @@ class Project_ctrl extends CI_Controller
     public function update_project($id)
     {
         $this->load->view('head');
-        $this->load->view('body');
+        $this->load->view('project/body_project');
         $data['team'] = $this->Project_model->getTeam();
         $data['data'] = $this->Project_model->getbyID($id);
         $this->load->view('Project/update_project', $data);
