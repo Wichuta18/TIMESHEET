@@ -11,10 +11,11 @@
           <li class="nav-item dropdown navbar-search"><a class="nav-link dropdown-toggle hide" data-toggle="dropdown" href="#"><i class="ficon ft-search"></i></a>
             <ul class="dropdown-menu">
               <li class="arrow_box">
-                <form>
+                <form method="get" action="<?php echo base_url("project_ctrl/project");?>">
                   <div class="input-group search-box">
                     <div class="position-relative has-icon-right full-width">
-                      <input class="form-control" id="search" type="text" placeholder="Search here...">
+                      <input class="form-control" id="search" type="text" name="search" placeholder="Search here..." 
+                      value="<?php if($this->input->get('search')) echo $this->input->get('search');?>">
                       <div class="form-control-position navbar-search-close"><i class="ft-x">   </i></div>
                     </div>
                   </div>
