@@ -101,25 +101,32 @@
     <form action="<?php echo base_url() ?>register_ctrl/validation" method="post">
 		<h2>Create Account</h2>
 		<p class="lead">Welcome</p>
+		<div class="form-group">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="fa fa-user"></i></span>
+				<input type="text" class="form-control" name="fullname" placeholder="Fullname" value="<?php echo set_value('fullname');?>"/>
+				<span class="text-danger"><?php echo form_error('fullname');?></span>	
+			</div>
+        </div>
         <div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon"><i class="fa fa-user"></i></span>
 				<input type="text" class="form-control" name="username" placeholder="Username" value="<?php echo set_value('username');?>"/>
-				<span class="text-dander"><?php echo form_error('username');?></span>	
+				<span class="text-danger"><?php echo form_error('username');?></span>	
 			</div>
         </div>
         <div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
 				<input type="email" class="form-control" name="email" placeholder="Email" value="<?php echo set_value('email');?>"/>
-				<span class="text-dander"><?php echo form_error('email');?></span>
+				<span class="text-danger"><?php echo form_error('email');?></span>
 			</div>
         </div>
 		<div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				<input type="text" class="form-control" name="password" placeholder="Password" value="<?php echo set_value('email');?>"/>
-				<span class="text-dander"><?php echo form_error('password');?></span>
+				<input type="password" class="form-control" name="password" placeholder="Password" value="<?php echo set_value('password');?>"/>
+				<span class="text-danger"><?php echo form_error('password');?></span>
 			</div>
         </div>
 		<!-- <div class="form-group">
